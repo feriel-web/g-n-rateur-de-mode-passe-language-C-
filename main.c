@@ -113,6 +113,6 @@ int main() {
     evaluer_robustesse(mot_de_passe);
     sauvegarder_historique(mot_de_passe);
     printf("==========================================\n");
-printf("fin de projet");
+
     return 0;
 }
