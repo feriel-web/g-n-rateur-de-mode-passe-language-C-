@@ -55,3 +55,64 @@ void sauvegarder_historique(const char *mdp) {
     printf("Mot de passe enregistre dans '%s'.\n", FICHIER_HISTORIQUE);
 }
 
+int main() {
+    int longueur;
+    int inclure_maj, inclure_chiffres, inclure_symboles;
+    char jeu_complet[300] = "";
+    char mot_de_passe[MAX_TAILLE];
+    int pos = 0;
+
+    srand((unsigned int)time(NULL));
+
+    printf("=== GENERATEUR DE MOTS DE PASSE SECURISE ===\n\n");
+
+    do {
+        printf("Choisissez la longueur du mot de passe (min 4, max 99) : ");
+        if (scanf("%d", &longueur) != 1) {
+            while (getchar() != '\n');
+        }
+    } while (longueur < 4 || longueur >= MAX_TAILLE);
+
+    printf("Inclure des lettres majuscules ? (1: Oui, 0: Non) : ");
+    scanf("%d", &inclure_maj);
+    printf("Inclure des chiffres ? (1: Oui, 0: Non) : ");
+    scanf("%d", &inclure_chiffres);
+    printf("Inclure des symboles ? (1: Oui, 0: Non) : ");
+    scanf("%d", &inclure_symboles);
+
+    // Forcer au moins 1 caractère de chaque type sélectionné
+    mot_de_passe[pos++] = MINUSCULES[rand() % strlen(MINUSCULES)];
+    strcat(jeu_complet, MINUSCULES);
+
+    if (inclure_maj) {
+        mot_de_passe[pos++] = MAJUSCULES[rand() % strlen(MAJUSCULES)];
+        strcat(jeu_complet, MAJUSCULES);
+    }
+    if (inclure_chiffres) {
+        mot_de_passe[pos++] = CHIFFRES[rand() % strlen(CHIFFRES)];
+        strcat(jeu_complet, CHIFFRES);
+    }
+    if (inclure_symboles) {
+        mot_de_passe[pos++] = SYMBOLES[rand() % strlen(SYMBOLES)];
+        strcat(jeu_complet, SYMBOLES);
+    }
+
+    //  Remplir le reste de la longueur voulue
+    int taille_jeu = strlen(jeu_complet);
+    for (; pos < longueur; pos++) {
+        mot_de_passe[pos] = jeu_complet[rand() % taille_jeu];
+    }
+    mot_de_passe[longueur] = '\0';
+
+    //  Mélanger 
+    melanger(mot_de_passe, longueur);
+
+    // Affichage
+    printf("\n==========================================");
+    printf("\nMot de passe genere : %s\n", mot_de_passe);
+    evaluer_robustesse(mot_de_passe);
+    sauvegarder_historique(mot_de_passe);
+    printf("==========================================\n");
+printf("fin de projet");
+    return 0;
+}
