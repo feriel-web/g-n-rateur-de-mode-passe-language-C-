@@ -44,3 +44,14 @@ int score = a_min + a_maj + a_chiffre + a_symbole;
     }
 }
 
+void sauvegarder_historique(const char *mdp) {
+    FILE *fichier = fopen(FICHIER_HISTORIQUE, "a");
+    if (fichier == NULL) {
+        printf("Erreur d'ouverture du fichier.\n");
+        return;
+    }
+    fprintf(fichier, "%s\n", mdp);
+    fclose(fichier);
+    printf("Mot de passe enregistre dans '%s'.\n", FICHIER_HISTORIQUE);
+}
+
