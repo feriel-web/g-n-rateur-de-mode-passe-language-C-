@@ -21,3 +21,14 @@ void melanger(char *str, int taille) {
         str[j] = temp;
     }
 }
+void evaluer_robustesse(const char *mdp) {
+    int longueur = strlen(mdp);
+    int a_min = 0, a_maj = 0, a_chiffre = 0, a_symbole = 0;
+
+    for (int i = 0; i < longueur; i++) {
+        if (islower((unsigned char)mdp[i])) a_min = 1;
+        else if (isupper((unsigned char)mdp[i])) a_maj = 1;
+        else if (isdigit((unsigned char)mdp[i])) a_chiffre = 1;
+        else a_symbole = 1;
+    }
+
