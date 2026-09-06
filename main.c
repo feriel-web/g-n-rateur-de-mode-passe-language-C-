@@ -32,3 +32,15 @@ void evaluer_robustesse(const char *mdp) {
         else a_symbole = 1;
     }
 
+int score = a_min + a_maj + a_chiffre + a_symbole;
+
+    printf("\n--- Indice de robustesse ---\n");
+    if (longueur >= 12 && score == 4) {
+        printf("Niveau : TRES FORT (Excellente securite)\n");
+    } else if (longueur >= 8 && score >= 3) {
+        printf("Niveau : MOYEN (Accepte pour un usage standard)\n");
+    } else {
+        printf("Niveau : FAIBLE (Ajoutez de la longueur et des symboles)\n");
+    }
+}
+
