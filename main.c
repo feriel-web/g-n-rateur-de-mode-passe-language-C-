@@ -108,11 +108,11 @@ int main() {
     melanger(mot_de_passe, longueur);
 
     // Affichage
-    printf("\n==========================================");
+    printf("\n");
     printf("\nMot de passe genere : %s\n", mot_de_passe);
     evaluer_robustesse(mot_de_passe);
     sauvegarder_historique(mot_de_passe);
-    printf("==========================================\n");
+    printf("\n");
 
     return 0;
 }
